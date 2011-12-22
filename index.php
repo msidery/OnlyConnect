@@ -4,9 +4,10 @@
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
 <title>TREV SMELLS :)</title>
+<link rel="stylesheet" href="./layout.css" type="text/css" />
 </head>
 <body>
-
+<div id="wrapper">
 <?php
 
 define('DB_SERVER', 'localhost');
@@ -25,21 +26,23 @@ if (!$con) {
 
 mysql_select_db(DB_NAME, $con);
 
-$result = mysql_query("SELECT * FROM vowels");
+$count = 1;
+
+$result = mysql_query("SELECT * FROM vowels WHERE id_vowel=$count");
 while($row = mysql_fetch_array($result))
 {
 	$test = str_replace(
 		array('a', 'e', 'i', 'o', 'u', ' ')
 		, '', $row['word']);
-	echo '<h1>'.$row['clue'].'</h1>';
-	echo '<h2>'.$test.'</h2>';
+	echo '<center><h1 id="clue">'.$row['clue'].'</h1>';
+	echo '<h2 id="word">'.$test.'</h2></center>';
 }
 
 // close connection
 mysql_close($con);
 
 ?>
-
+</div>
 </body>
 </html>
 
