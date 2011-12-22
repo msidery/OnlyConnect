@@ -1,0 +1,13 @@
+body {
+	background-color: #EEE;
+}
+#wrapper {
+	width: 500px;
+	margin: 50px auto 10px;
+}
+#clue {
+	font-size: 60px;
+}
+#word {
+	font-size: 45px;
+}
