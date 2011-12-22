@@ -34,14 +34,32 @@ while($row = mysql_fetch_array($result))
 	$test = str_replace(
 		array('a', 'e', 'i', 'o', 'u', ' ')
 		, '', $row['word']);
+
 	echo '<center><h1 id="clue">'.$row['clue'].'</h1>';
-	echo '<h2 id="word">'.$test.'</h2></center>';
+	echo '<button id="word">';
+
+	$pos = 0;
+	$space = 0;
+	while ($pos < strlen($test)) {
+		$random = (integer)log(rand(0,15)) + 1;
+		for ($i = 0; $i < $random; $i++) {
+			if ($pos + $i < strlen($test)) {
+				echo $test[$pos + $i];
+			}
+		}
+		echo '&nbsp;';
+		$pos = $pos + $random;
+	}
+
+
+	echo '</button></center>';
 }
 
 // close connection
 mysql_close($con);
 
 ?>
+
 </div>
 </body>
 </html>
