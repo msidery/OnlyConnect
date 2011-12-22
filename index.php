@@ -25,30 +25,20 @@ if (!$con) {
 
 mysql_select_db(DB_NAME, $con);
 
-$result = mysql_query("SELECT * FROM contacts ORDER BY contact_id");
-$count = 0;
+$result = mysql_query("SELECT * FROM vowels");
 while($row = mysql_fetch_array($result))
 {
-	$result2 = mysql_query("SELECT * FROM contacts WHERE contact_id=".$count);
-	$num = mysql_num_rows ($result2);
-	echo '<div class="content"><p><strong>'.$row['title'].'</strong><br/>';
-	echo $row['name'].'<br/>';
-	echo '<em><a href="mailto: '.$row['email'].'">'.$row['email'].'</a></em>';
-	while ($num > 1) {
-		$row = mysql_fetch_array($result);
-		echo $row['name'].'<br/>';
-		echo '<em><a href="mailto: '.$row['email'].'">'.$row['email'].'</a></em>';
-		$num--;
-	}
-	echo "</p>\n</div>";
-	$count++;
+	$test = str_replace(
+		array('a', 'e', 'i', 'o', 'u', ' ')
+		, '', $row['word']);
+	echo '<h1>'.$row['clue'].'</h1>';
+	echo '<h2>'.$test.'</h2>';
 }
 
 // close connection
 mysql_close($con);
-include('temp.php');
-?>
 
+?>
 
 </body>
 </html>
