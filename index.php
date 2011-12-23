@@ -5,9 +5,16 @@
 <head>
 <title>TREV SMELLS :)</title>
 <link rel="stylesheet" href="./layout.css" type="text/css" />
+<script type="text/javascript">
+	function revealWord(wordtext) {
+		document.getElementById("word").innerHTML = wordtext;
+		document.getElementById("team1").style.display = "inline";
+		document.getElementById("team2").style.display = "inline";
+	}
+</script>
 </head>
 <body>
-<div id="wrapper">
+<!-- <div id="wrapper"> -->
 <?php
 
 define('DB_SERVER', 'localhost');
@@ -26,17 +33,17 @@ if (!$con) {
 
 mysql_select_db(DB_NAME, $con);
 
-$count = 1;
+$count = rand(1, 4);
 
 $result = mysql_query("SELECT * FROM vowels WHERE id_vowel=$count");
-while($row = mysql_fetch_array($result))
+if ($row = mysql_fetch_array($result))
 {
 	$test = str_replace(
 		array('a', 'e', 'i', 'o', 'u', ' ')
 		, '', $row['word']);
 
 	echo '<center><h1 id="clue">'.$row['clue'].'</h1>';
-	echo '<button id="word">';
+	echo '<button id="word" type="button" onclick="revealWord(\''.$row['word'].'\')">';
 
 	$pos = 0;
 	$space = 0;
@@ -59,8 +66,12 @@ while($row = mysql_fetch_array($result))
 mysql_close($con);
 
 ?>
-
+<div class="team_button_div">
+<button class="team_button" id="team1" type="button" onclick="next(1)" style="float: left;">Team 1</button>
+<button class="team_button" id="team2" type="button" onclick="next(2)" style="float: right;">Team 2</button>
 </div>
+
+<!-- </div> -->
 </body>
 </html>
 

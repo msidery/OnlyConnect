@@ -7,7 +7,18 @@ body {
 }
 #clue {
 	font-size: 60px;
+	margin: 50px auto 20px;
 }
 #word {
 	font-size: 45px;
+	margin: 20px auto;
+}
+.team_button_div {
+	width: 400px;
+	margin: 20px auto;
+}
+.team_button {
+	 width: 150px;
+	 height: 100px;
+	 display: none;
 }
