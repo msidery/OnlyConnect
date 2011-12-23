@@ -23,23 +23,26 @@
 <!-- <div id="wrapper"> -->
 <?php
 
-require './constants.php';
+include './constants.php';
 
 // some of the code i used for badminton website. does database stuff. figure it out :P
 
-
-// open database connection
-$con = mysql_connect(DB_SERVER, DB_USER, DB_PASS);
-if (!$con) {
-	die('Could not connect: '.mysql_error());
+class MyDB extends SQLite3
+{
+    function __construct()
+    {
+        $this->open('db/only_connect.db');
+    }
 }
 
-mysql_select_db(DB_NAME, $con);
+// open database connection
+$con = new MyDB();
 
 $count = rand(1, 4);
 
-$result = mysql_query("SELECT * FROM vowels WHERE id_vowel=$count");
-if ($row = mysql_fetch_array($result))
+$result = $con->query("SELECT * FROM vowels WHERE id_vowel=$count");
+
+if ($row = $result->fetchArray())
 {
 	$test = str_replace(
 		array('a', 'e', 'i', 'o', 'u', ' ')
@@ -66,7 +69,7 @@ if ($row = mysql_fetch_array($result))
 }
 
 // close connection
-mysql_close($con);
+$con->close();
 
 ?>
 <form class="team_button_div" action="incScore.php" method="post">
