@@ -10,6 +10,12 @@
 		document.getElementById("word").innerHTML = wordtext;
 		document.getElementById("team1").style.display = "inline";
 		document.getElementById("team2").style.display = "inline";
+		document.getElementById("none").style.display = "inline";
+	}
+	
+	function next(teamnum) {
+		// addScore.php
+		// actually i think this all goes in the button element
 	}
 </script>
 </head>
@@ -17,10 +23,7 @@
 <!-- <div id="wrapper"> -->
 <?php
 
-define('DB_SERVER', 'localhost');
-define('DB_NAME', 'only_connect');
-define('DB_USER', 'root');
-define('DB_PASS', 's3cur3');
+require './constants.php';
 
 // some of the code i used for badminton website. does database stuff. figure it out :P
 
@@ -66,10 +69,11 @@ if ($row = mysql_fetch_array($result))
 mysql_close($con);
 
 ?>
-<div class="team_button_div">
-<button class="team_button" id="team1" type="button" onclick="next(1)" style="float: left;">Team 1</button>
-<button class="team_button" id="team2" type="button" onclick="next(2)" style="float: right;">Team 2</button>
-</div>
+<form class="team_button_div" action="incScore.php" method="post">
+	<input class="team_button" id="team1" type="submit" name="team1" value="Team 1" />
+	<input class="team_button" id="none" type="submit" name="none" value="None" />
+	<input class="team_button" id="team2" type="submit" name="team2" value="Team 2" />
+</form>
 
 <!-- </div> -->
 </body>

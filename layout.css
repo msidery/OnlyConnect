@@ -2,7 +2,7 @@ body {
 	background-color: #EEE;
 }
 #wrapper {
-	width: 500px;
+	width: 900px;
 	margin: 50px auto 10px;
 }
 #clue {
@@ -14,11 +14,13 @@ body {
 	margin: 20px auto;
 }
 .team_button_div {
-	width: 400px;
+	width: 450px;
 	margin: 20px auto;
 }
 .team_button {
 	 width: 150px;
 	 height: 100px;
 	 display: none;
+	 font-size: 30px;
+	 float: left;
 }
