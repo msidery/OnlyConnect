@@ -64,7 +64,6 @@ if ($row = $result->fetchArray())
 		$pos = $pos + $random;
 	}
 
-
 	echo '</button></center>';
 }
 

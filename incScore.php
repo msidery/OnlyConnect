@@ -5,15 +5,21 @@ require './constants.php';
 // some of the code i used for badminton website. does database stuff. figure it out :P
 
 // open database connection
-$con = mysql_connect(DB_SERVER, DB_USER, DB_PASS);
-if (!$con) {
-	die('Could not connect: '.mysql_error());
+class MyDB extends SQLite3
+{
+    function __construct()
+    {
+        $this->open('db/only_connect.db');
+    }
 }
 
-mysql_select_db(DB_NAME, $con);
+// open database connection
+$con = new MyDB();
 
-$result = mysql_query("SELECT * FROM scores");
-if ($row = mysql_fetch_array($result))
+$result = $con->query("SELECT * FROM scores");
+
+if ($row = $result->fetchArray())
+
 {
 	if (isset($_POST['team1'])) {
 		echo 'team 1';
@@ -27,6 +33,6 @@ if ($row = mysql_fetch_array($result))
 }
 
 // close connection
-mysql_close($con);
+$con->close();
 
 ?>
