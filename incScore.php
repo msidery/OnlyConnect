@@ -1,3 +1,6 @@
+<center><h1>SCORES</h1>
+<h2>Team 1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Team 2</h2></center>
+
 <?php
 
 require './constants.php';
@@ -9,27 +12,27 @@ class MyDB extends SQLite3
 {
     function __construct()
     {
-        $this->open('db/only_connect.db');
+        $this->open(DATABASE);
     }
 }
 
 // open database connection
 $con = new MyDB();
+$text = '';
+if (isset($_POST['team1'])) {
+	$con->query('UPDATE scores SET team1=team1+'.$_POST['amount']);
+}
+else if (isset($_POST['none'])) {
+}
+else if (isset($_POST['team2'])) {
+	$con->query('UPDATE scores SET team2=team2+'.$_POST['amount']);
+}
 
 $result = $con->query("SELECT * FROM scores");
 
 if ($row = $result->fetchArray())
-
 {
-	if (isset($_POST['team1'])) {
-		echo 'team 1';
-	}
-	else if (isset($_POST['none'])) {
-		echo 'none';
-	}
-	else if (isset($_POST['team2'])) {
-		echo 'team 2';
-	}
+	echo '<center><h2>'.$row['team1'].'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'.$row['team2'].'</h2></center>';
 }
 
 // close connection

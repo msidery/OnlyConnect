@@ -6,21 +6,7 @@
 <title>TREV SMELLS :)</title>
 <link rel="stylesheet" href="./layout.css" type="text/css" />
 <script type="text/javascript">
-	function revealWord(wordtext) {
-		document.getElementById("word").innerHTML = wordtext;
-		document.getElementById("team1").style.display = "inline";
-		document.getElementById("team2").style.display = "inline";
-		document.getElementById("none").style.display = "inline";
-	}
-	
-	function next(teamnum) {
-		// addScore.php
-		// actually i think this all goes in the button element
-	}
-</script>
-</head>
-<body>
-<!-- <div id="wrapper"> -->
+window.onload = function() { timedCount(); }
 <?php
 
 include './constants.php';
@@ -31,7 +17,7 @@ class MyDB extends SQLite3
 {
     function __construct()
     {
-        $this->open('db/only_connect.db');
+        $this->open(DATABASE);
     }
 }
 
@@ -42,15 +28,78 @@ $count = rand(1, 4);
 
 $result = $con->query("SELECT * FROM vowels WHERE id_vowel=$count");
 
-if ($row = $result->fetchArray())
-{
+if ($row = $result->fetchArray()):
+?>
+	var t;
+	var userRevealed = true;
+	var time = 11;
+	function timer() {
+		t=setTimeout("endWord('<?php echo $row['word']; ?>')", 1000);
+	}
+	function timedCount()
+	{
+		if (time == 1) {
+			endWord('<?php echo $row['word']; ?>');
+			//document.getElementById("timertext").value = "time up";
+			//document.getElementById("timertext").style.width = "190px";
+			return;
+		}
+		time = time - 1;
+		//document.getElementById('timertext').value = time;
+		clearTimeout(t);
+		t = setTimeout("timedCount()", 1000);
+	}
+	function endWord(wordtext) {
+		document.getElementById("word").innerHTML = wordtext;
+		document.getElementById("none").style.display = "inline";
+		document.getElementById("none").style.float = "none";
+		document.getElementById("none").value = "next";
+		document.getElementById("none").style.margin = "0px 150px";
+		userRevealed = false;
+	}
+	function pauseButton() {
+		clearTimeout(t);
+		if (userRevealed) {
+			document.getElementById("word").innerHTML = "reveal";
+			document.getElementById("word").onclick = "revealWord('<?php echo $row['word']; ?>')";
+		}
+	}
+	function revealWord(wordtext) {
+		if (userRevealed) {
+			document.getElementById("word").innerHTML = wordtext;
+			document.getElementById("team1").style.display = "inline";
+			document.getElementById("team2").style.display = "inline";
+			document.getElementById("none").style.display = "inline";
+			document.getElementById("team1").style.background = "#f00";
+			document.getElementById("team2").style.background = "#00f";
+			clearTimeout(t);
+		}
+	}
+	function toggle(word) {
+		revealWord(word);
+		if (document.getElementById("word").style.background == "red")
+			document.getElementById("word").style.background = "white";
+		else
+			document.getElementById("word").style.background = "red";
+	}
+	
+	function next(teamnum) {
+		// addScore.php
+		// actually i think this all goes in the button element
+	}
+</script>
+</head>
+<body>
+<!-- <div id="wrapper">
+<center><input id="timertext" type="text" value="10" /></center> -->
+<?php
 	$test = str_replace(
 		array('a', 'e', 'i', 'o', 'u', ' ')
 		, '', $row['word']);
 
 	echo '<center><h1 id="clue">'.$row['clue'].'</h1>';
-	echo '<button id="word" type="button" onclick="revealWord(\''.$row['word'].'\')">';
 
+	echo '<button id="word" type="button" onclick="pauseButton()">';
 	$pos = 0;
 	$space = 0;
 	while ($pos < strlen($test)) {
@@ -65,13 +114,14 @@ if ($row = $result->fetchArray())
 	}
 
 	echo '</button></center>';
-}
+endif;
 
 // close connection
 $con->close();
 
 ?>
 <form class="team_button_div" action="incScore.php" method="post">
+	<input type="text" name="amount" value="1" style="display: none;" />
 	<input class="team_button" id="team1" type="submit" name="team1" value="Team 1" />
 	<input class="team_button" id="none" type="submit" name="none" value="None" />
 	<input class="team_button" id="team2" type="submit" name="team2" value="Team 2" />
