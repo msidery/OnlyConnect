@@ -1,13 +1,9 @@
-<center><h1>SCORES</h1>
-<h2>Team 1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Team 2</h2>
-
 <?php
 
-require './constants.php';
+include './constants.php';
 
 // some of the code i used for badminton website. does database stuff. figure it out :P
 
-// open database connection
 class MyDB extends SQLite3
 {
     function __construct()
@@ -15,33 +11,6 @@ class MyDB extends SQLite3
         $this->open(DATABASE);
     }
 }
-
-// open database connection
-$con = new MyDB();
-$text = '';
-if (isset($_POST['team1'])) {
-	$con->query('UPDATE scores SET team1=team1+'.$_POST['amount']);
-}
-else if (isset($_POST['none'])) {
-}
-else if (isset($_POST['team2'])) {
-	$con->query('UPDATE scores SET team2=team2+'.$_POST['amount']);
-}
-
-$result = $con->query("SELECT * FROM scores");
-
-if ($row = $result->fetchArray())
-{
-	echo '<h2>'.$row['team1'].'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'.$row['team2'].'</h2>';
-}
-
-// close connection
-$con->close();
-
-?>
-
-
-<?php
 
 function levelName($levelNum) {
 	switch ($levelNum) {
@@ -57,9 +26,6 @@ function levelName($levelNum) {
 		case 4: {
 			return 'vowels';
 		}
-		default: {
-			return 'scores';
-		}
 	}
 }
 
@@ -73,7 +39,7 @@ if ($row = $result->fetchArray()) {
 	if ($row2 = $result2->fetchArray()) {
 		if ($row['roundNum'] < $row2['numRounds']) {
 			echo $row['currentLevel'].', '.$row['roundNum'];
-			$next = levelName($row['currentLevel']);
+			//$next = levelName($row['currentLevel']);
 			$con->query('UPDATE level SET roundNum=roundNum+1');
 			$con->query('UPDATE level SET playingTeam=1-playingTeam');
 		}
@@ -82,7 +48,7 @@ if ($row = $result->fetchArray()) {
 				$next = 'scores';
 			}
 			else {
-				$next = levelName($row['currentLevel']+1);
+				//$next = levelName($row['currentLevel']+1);
 				$con->query('UPDATE level SET currentLevel=currentLevel+1');
 				$con->query('UPDATE level SET roundNum=1');
 				$con->query('UPDATE level SET playingTeam=1-playingTeam');
@@ -102,8 +68,3 @@ else {
 $con->close();
 
 ?>
-
-<form class="team_button_div" action="<?php echo $next; ?>.php" method="post">
-	<input class="team_button" type="submit" name="next" value="Next" />
-</form>
-</center>
