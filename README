@@ -1,8 +1,0 @@
-database: only_connect
-tables: vowels
-
-vowels:
-	id_vowel (int, auto increment, primary)
-	clue (varchar, length=256)
-	word (varchar, length=256)
-	
