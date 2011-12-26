@@ -12,8 +12,14 @@ sqlite3 only_connect.db "CREATE TABLE categories (
 	word4 VARCHAR(256) NOT NULL
 );"
 
+
 sqlite3 only_connect.db "INSERT INTO categories VALUES (1, 'colours', 'red', 'blue', 'green', 'yellow');"
 
+sqlite3 only_connect.db "INSERT INTO categories VALUES (2, 'numbers', '1', '2', '3', '4');"
+sqlite3 only_connect.db "INSERT INTO categories VALUES (3, 'numbers3', '13', '23', '33', '43');"
+sqlite3 only_connect.db "INSERT INTO categories VALUES (4, 'numbers4', '14', '24', '34', '44');"
+sqlite3 only_connect.db "INSERT INTO categories VALUES (5, 'numbers5', '15', '25', '35', '45');"
+sqlite3 only_connect.db "INSERT INTO categories VALUES (6, 'numbers6', '16', '26', '36', '46');"
 # VOWEL GAME ##################################################################
 sqlite3 only_connect.db "CREATE TABLE vowels (
 	id_vowel INTEGER NOT NULL PRIMARY KEY,

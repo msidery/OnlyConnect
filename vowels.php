@@ -24,7 +24,11 @@ class MyDB extends SQLite3
 // open database connection
 $con = new MyDB();
 
-$count = rand(1, 4);
+$result0 = $con->query("SELECT * FROM level");
+$count = 0;
+if ($row0 = $result0->fetchArray()) {
+	$count = $row0['roundNum'];
+}
 
 $result = $con->query("SELECT * FROM vowels WHERE id_vowel=$count");
 
@@ -47,7 +51,7 @@ if ($row = $result->fetchArray()):
 		time = time - 1;
 		//document.getElementById('timertext').value = time;
 		clearTimeout(t);
-		t = setTimeout("timedCount()", 10);
+		t = setTimeout("timedCount()", 1000);
 	}
 	function endWord(wordtext) {
 		document.getElementById("word").innerHTML = wordtext;

@@ -6,7 +6,6 @@
 <title>CATEGORIES</title>
 <link rel="stylesheet" href="./layout.css" type="text/css" />
 <script type="text/javascript">
-window.onload = function() { timedCount(); }
 <?php
 
 include './constants.php';
@@ -24,24 +23,22 @@ class MyDB extends SQLite3
 // open database connection
 $con = new MyDB();
 
-$count = rand(1, 4);
-
-$result = $con->query("SELECT * FROM vowels WHERE id_vowel=$count");
-
+$result = $con->query("SELECT * FROM level");
 if ($row = $result->fetchArray()):
+	$result2 = $con->query("SELECT * FROM categories WHERE id_categories=".$row['roundNum']);
+	if ($row2 = $result2->fetchArray()):
+
 ?>
+window.onload = function() { timedCount(); }
 	var t;
 	var userRevealed = true;
 	var time = 46;
-	function timer() {
-		t=setTimeout("endWord('<?php echo $row['word']; ?>')", 1000);
-	}
 	function timedCount()
 	{
 		if (time == 1) {
-			endWord('<?php echo $row['word']; ?>');
 			document.getElementById("timertext").value = "time up";
 			document.getElementById("timertext").style.width = "190px";
+			endWord('<?php echo $row2['connection']; ?>');
 			return;
 		}
 		time = time - 1;
@@ -50,7 +47,11 @@ if ($row = $result->fetchArray()):
 		t = setTimeout("timedCount()", 100);
 	}
 	function endWord(wordtext) {
-		document.getElementById("word").innerHTML = wordtext;
+		document.getElementById("category").style.display = "inline";
+		document.getElementById("category").innerHTML = wordtext;
+		document.getElementById("button2").style.display = "inline";
+		document.getElementById("button3").style.display = "inline";
+		document.getElementById("button4").style.display = "inline";
 		document.getElementById("none").style.display = "inline";
 		document.getElementById("none").style.float = "none";
 		document.getElementById("none").value = "next";
@@ -60,9 +61,21 @@ if ($row = $result->fetchArray()):
 	function pauseButton() {
 		clearTimeout(t);
 		if (userRevealed) {
-			document.getElementById("word").innerHTML = "reveal";
-			document.getElementById("word").onclick = "revealWord('<?php echo $row['word']; ?>')";
+			document.getElementById("category").innerHTML = "reveal";
+			document.getElementById("category").onclick = "revealWord('<?php echo $row2['connection']; ?>')";
 		}
+	}
+	function reveal2() {
+		document.getElementById("button2").style.display = "inline";
+		document.getElementById("score").value = "3";
+	}
+	function reveal3() {
+		document.getElementById("button3").style.display = "inline";
+		document.getElementById("score").value = "2";
+	}
+	function reveal4() {
+		document.getElementById("button4").style.display = "inline";
+		document.getElementById("score").value = "1";
 	}
 	function revealWord(wordtext) {
 		if (userRevealed) {
@@ -86,29 +99,27 @@ if ($row = $result->fetchArray()):
 </head>
 <body>
 <!-- <div id="wrapper"> -->
-<center><input id="timertext" type="text" value="10" /></center>
-<div id="">
+<center><input id="timertext" type="text" value="45" /></center>
+<div style="width: 1000px; height: 50px; margin: 10px auto;">
 <center>
 <?php
-
-$result = $con->query("SELECT * FROM level");
-if ($row = $result->fetchArray()) {
-	$result2 = $con->query("SELECT * FROM categories WHERE id_categories=".$row['roundNum']);
-	if ($row2 = $result2->fetchArray()) {
 		for ($i=1; $i < 5; $i++) { 
-			echo '<button id="button'.$i.'">'.$row2['word'.$i].'</button>';
+			echo '<button id="button'.$i.'" style="font-size: 300%;';
+			if ($i != 1)
+				echo ' display: none;';
+			echo '" onclick="reveal'.($i+1).'()">'.$row2['word'.$i].'</button>';
 		}
-	}
-}
-	echo '</center>';
+	endif;
 endif;
+echo '</center>';
 
 // close connection
 $con->close();
 
 ?>
+<div style="width: 100px;margin:10px auto"><center><button id="category" onclick="pauseButton()" style="font-size: 300%;">Stop</button></center></div>
 <form class="team_button_div" action="incScore.php" method="post">
-	<input type="text" name="amount" value="1" style="display: none;" />
+	<input id="score" type="text" name="amount" value="5" style="display: none;" />
 	<input class="team_button" id="team1" type="submit" name="team1" value="Team 1" />
 	<input class="team_button" id="none" type="submit" name="none" value="None" />
 	<input class="team_button" id="team2" type="submit" name="team2" value="Team 2" />
