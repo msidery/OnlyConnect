@@ -30,16 +30,16 @@
 	}
 
         function checkSelection() {
-                var group = answer[0]/4;
+                var group = Math.floor(words[answers[0]]/4);
                 for (var k = 1; k <=3; k++)
-                         if (answer[k]/4 != group)
+                         if (Math.floor(words[answers[k]]/4) != group)
                                  return false;
                 return true;
         }
 
         function fillAnswers(){
                 var index = 0;
-                for (var k = 0; k <= 16; k += 1)
+                for (var k = 0; k <= 15; k += 1)
                         if (a[k] == 1)
                                 answers[index++]=k;
         }
@@ -59,19 +59,20 @@
                         a[i] = 1;
                         var tempCount = 0;
                         for(var j = 0; j < 16; j +=1){
-                                tempCount += a[i]
+                                tempCount += a[j];
                         }
-                        if ( tempCount == 4){ \\if there are enough buttons selected.
+                        if ( tempCount == 4){ //if there are enough buttons selected.
                                 fillAnswers();
                                 a = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
-                                if(checkSelection()){ \\correct answers, disable buttons
-                                       for(var j = 0; j <=4; j += 1){
+                                if(checkSelection()){ //correct answers, disable buttons
+                                       for(var j = 0; j <=3; j += 1){
                                                document.getElementById("btn"+answers[j]).disabled = true;
-                                               document.getElementById("btn"+answers[j]).style.background = colours[correct++];
+                                               document.getElementById("btn"+answers[j]).style.background = colours[correct];
                                        }
+                                       correct++;
                                 }
-                                else { \\wrong answers, switch off buttons
-                                       for(var j = 0; j <=4; j += 1)
+                                else { //wrong answers, switch off buttons
+                                       for(var j = 0; j <=3; j += 1)
                                                document.getElementById("btn"+answers[j]).style.background = "white";
                                 }
                         }
