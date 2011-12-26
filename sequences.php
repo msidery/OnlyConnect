@@ -25,7 +25,7 @@ $con = new MyDB();
 
 $result = $con->query("SELECT * FROM level");
 if ($row = $result->fetchArray()):
-	$result2 = $con->query("SELECT * FROM categories WHERE id_categories=".$row['roundNum']);
+	$result2 = $con->query("SELECT * FROM sequences WHERE id_sequences=".$row['roundNum']);
 	if ($row2 = $result2->fetchArray()):
 
 ?>
@@ -39,27 +39,27 @@ window.onload = function() { timedCount(); }
 			document.getElementById("timertext").value = "time up";
 			document.getElementById("timertext").style.width = "190px";
 			otherteam();
-			//endWord('<?php //echo $row2['connection']; ?>//');
 			return;
 		}
 		time = time - 1;
 		document.getElementById('timertext').value = time;
 		clearTimeout(t);
 		t = setTimeout("timedCount()", 100);
-	}function otherteam() {
-		//document.getElementById("category").style.display = "inline";
-		//document.getElementById("category").innerHTML = wordtext;
-		document.getElementById("category").innerHTML = "other team guess";
+	}
+	function otherteam() {
+		//document.getElementById("sequence").style.display = "inline";
+		//document.getElementById("sequence").innerHTML = wordtext;
+		document.getElementById("sequence").innerHTML = "other team guess";
 		document.getElementById("button2").style.display = "inline";
 		document.getElementById("button3").style.display = "inline";
 		document.getElementById("button4").style.display = "inline";
 		document.getElementById("score").value = "1";
-		document.getElementById("category").onclick = "revealWord('<?php echo $row2['connection']; ?>')";
+		document.getElementById("sequence").onclick = "revealWord('<?php echo $row2['word4']; ?>')";
 		userRevealed = false;
 	}
 	function endWord(wordtext) {
-		document.getElementById("category").style.display = "inline";
-		document.getElementById("category").innerHTML = wordtext;
+		document.getElementById("sequence").style.display = "inline";
+		document.getElementById("sequence").innerHTML = wordtext;
 		document.getElementById("button2").style.display = "inline";
 		document.getElementById("button3").style.display = "inline";
 		document.getElementById("button4").style.display = "inline";
@@ -69,24 +69,11 @@ window.onload = function() { timedCount(); }
 		document.getElementById("none").value = "next";
 		document.getElementById("none").style.margin = "0px 150px";
 	}
-	/*function endWord(wordtext) {
-		document.getElementById("category").style.display = "inline";
-		document.getElementById("category").innerHTML = wordtext;
-		document.getElementById("button2").style.display = "inline";
-		document.getElementById("button3").style.display = "inline";
-		document.getElementById("button4").style.display = "inline";
-		document.getElementById("score").value = "1";
-		document.getElementById("none").style.display = "inline";
-		document.getElementById("none").style.float = "none";
-		document.getElementById("none").value = "next";
-		document.getElementById("none").style.margin = "0px 150px";
-		userRevealed = false;
-	}*/
 	function pauseButton() {
 		clearTimeout(t);
 		if (userRevealed) {
-			document.getElementById("category").innerHTML = "reveal";
-			document.getElementById("category").onclick = "revealWord('<?php echo $row2['connection']; ?>')";
+			document.getElementById("sequence").innerHTML = "reveal";
+			document.getElementById("sequence").onclick = "revealWord('<?php echo $row2['word4']; ?>')";
 		}
 	}
 	function reveal2() {
@@ -97,17 +84,9 @@ window.onload = function() { timedCount(); }
 		document.getElementById("button3").style.display = "inline";
 		document.getElementById("score").value = "2";
 	}
-	function reveal4() {
-		document.getElementById("button4").style.display = "inline";
-		document.getElementById("score").value = "1";
-	}
-	function otherTeam() {
-		document.getElementById("button4").style.display = "inline";
-		document.getElementById("score").value = "1";
-	}
 	function revealWord(wordtext) {
 		//if (userRevealed) {
-			document.getElementById("category").innerHTML = wordtext;
+			document.getElementById("sequence").innerHTML = wordtext;
 			document.getElementById("team1").style.display = "inline";
 			document.getElementById("team2").style.display = "inline";
 			document.getElementById("none").style.display = "inline";
@@ -121,15 +100,16 @@ window.onload = function() { timedCount(); }
 <body>
 <!-- <div id="wrapper"> -->
 <center><input id="timertext" type="text" value="45" /></center>
-<div style="width: 1000px; height: 60px; margin: 10px auto;">
+<div style="width: 1000px; height: 50px; margin: 10px auto;">
 <center>
 <?php
-		for ($i=1; $i < 5; $i++) { 
+		for ($i=1; $i < 4; $i++) { 
 			echo '<button id="button'.$i.'" style="font-size: 300%;';
 			if ($i != 1)
 				echo ' display: none;';
 			echo '" onclick="reveal'.($i+1).'()">'.$row2['word'.$i].'</button>';
 		}
+		echo '<button id="button4" style="font-size: 300%;">?</button>';
 	endif;
 endif;
 echo '</center>';
@@ -138,7 +118,7 @@ echo '</center>';
 $con->close();
 
 ?>
-<div style="width: 100px;margin:10px auto"><center><button id="category" onclick="pauseButton()" style="font-size: 300%;">Stop</button></center></div>
+<div style="width: 100px;margin:10px auto"><center><button id="sequence" onclick="pauseButton()" style="font-size: 300%;">Stop</button></center></div>
 <form class="team_button_div" action="incScore.php" method="post">
 	<input id="score" type="text" name="amount" value="5" style="display: none;" />
 	<input class="team_button" id="team1" type="submit" name="team1" value="Team 1" />
@@ -149,4 +129,3 @@ $con->close();
 <!-- </div> -->
 </body>
 </html>
-
