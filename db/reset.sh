@@ -12,9 +12,7 @@ sqlite3 only_connect.db "CREATE TABLE categories (
 	word4 VARCHAR(256) NOT NULL
 );"
 
-
 sqlite3 only_connect.db "INSERT INTO categories VALUES (1, 'colours', 'red', 'blue', 'green', 'yellow');"
-
 sqlite3 only_connect.db "INSERT INTO categories VALUES (2, 'numbers', '1', '2', '3', '4');"
 sqlite3 only_connect.db "INSERT INTO categories VALUES (3, 'numbers3', '13', '23', '33', '43');"
 sqlite3 only_connect.db "INSERT INTO categories VALUES (4, 'numbers4', '14', '24', '34', '44');"
@@ -30,15 +28,36 @@ sqlite3 only_connect.db "CREATE TABLE sequences (
 	word4 VARCHAR(256) NOT NULL
 );"
 
-
 sqlite3 only_connect.db "INSERT INTO sequences VALUES (1, 'red', 'blue', 'green', 'yellow');"
-
 sqlite3 only_connect.db "INSERT INTO sequences VALUES (2, '1', '2', '3', '4');"
 sqlite3 only_connect.db "INSERT INTO sequences VALUES (3, '13', '23', '33', '43');"
 sqlite3 only_connect.db "INSERT INTO sequences VALUES (4, '14', '24', '34', '44');"
 sqlite3 only_connect.db "INSERT INTO sequences VALUES (5, '15', '25', '35', '45');"
 sqlite3 only_connect.db "INSERT INTO sequences VALUES (6, '16', '26', '36', '46');"
 
+# WALL GAME ###################################################################
+sqlite3 only_connect.db "CREATE TABLE wall(
+	id INTEGER,
+	oneOne VARCHAR(20),oneTwo VARCHAR(20),oneThree VARCHAR(20),oneFour VARCHAR(20),
+	twoOne VARCHAR(20),twoTwo VARCHAR(20),twoThree VARCHAR(20),twoFour VARCHAR(20),
+	threeOne VARCHAR(20),threeTwo VARCHAR(20),threeThree VARCHAR(20),threeFour VARCHAR(20),
+	fourOne VARCHAR(20),fourTwo VARCHAR(20),fourThree VARCHAR(20),fourFour VARCHAR(20)
+);"
+
+sqlite3 only_connect.db "INSERT INTO wall VALUES(
+	1,
+	'one','two','three','four',
+	'Colin','Helen','Gerald','Lin',
+	'Trev','Rich','Stu','Nit',
+	'Nixon','Oscar','Gilbert','Matilda'
+);"
+sqlite3 only_connect.db "INSERT INTO wall VALUES(
+	2,
+	'1','2','3','4',
+	'cat','dog','mouse','sheep',
+	'mars','saturn','jupiter','earth',
+	'a','b','c','d'
+);"
 
 # VOWEL GAME ##################################################################
 sqlite3 only_connect.db "CREATE TABLE vowels (
@@ -67,6 +86,7 @@ sqlite3 only_connect.db "INSERT INTO vowels VALUES(17, 'kitchenware17', 'oven');
 sqlite3 only_connect.db "INSERT INTO vowels VALUES(18, 'kitchenware18', 'oven');"
 sqlite3 only_connect.db "INSERT INTO vowels VALUES(19, 'kitchenware19', 'oven');"
 sqlite3 only_connect.db "INSERT INTO vowels VALUES(20, 'kitchenware20', 'oven');"
+
 # TEAM SCORES #################################################################
 sqlite3 only_connect.db "CREATE TABLE scores (
 	team1 INTEGER NOT NULL,

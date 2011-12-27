@@ -79,13 +79,6 @@ if ($row = $result->fetchArray()):
 			clearTimeout(t);
 		}
 	}
-	function toggle(word) {
-		revealWord(word);
-		if (document.getElementById("word").style.background == "red")
-			document.getElementById("word").style.background = "white";
-		else
-			document.getElementById("word").style.background = "red";
-	}
 </script>
 </head>
 <body>

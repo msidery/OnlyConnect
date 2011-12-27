@@ -45,8 +45,11 @@ window.onload = function() { timedCount(); }
 		time = time - 1;
 		document.getElementById('timertext').value = time;
 		clearTimeout(t);
-		t = setTimeout("timedCount()", 100);
-	}function otherteam() {
+		t = setTimeout("timedCount()", 1000);
+	}
+	function otherteam() {
+		for (var i = 1; i < 5; i++)
+			document.getElementById("button"+i).disabled = true;
 		//document.getElementById("category").style.display = "inline";
 		//document.getElementById("category").innerHTML = wordtext;
 		document.getElementById("category").innerHTML = "other team guess";
@@ -58,6 +61,8 @@ window.onload = function() { timedCount(); }
 		userRevealed = false;
 	}
 	function endWord(wordtext) {
+		for (var i = 1; i < 5; i++)
+			document.getElementById("button"+i).disabled = true;
 		document.getElementById("category").style.display = "inline";
 		document.getElementById("category").innerHTML = wordtext;
 		document.getElementById("button2").style.display = "inline";
@@ -69,20 +74,9 @@ window.onload = function() { timedCount(); }
 		document.getElementById("none").value = "next";
 		document.getElementById("none").style.margin = "0px 150px";
 	}
-	/*function endWord(wordtext) {
-		document.getElementById("category").style.display = "inline";
-		document.getElementById("category").innerHTML = wordtext;
-		document.getElementById("button2").style.display = "inline";
-		document.getElementById("button3").style.display = "inline";
-		document.getElementById("button4").style.display = "inline";
-		document.getElementById("score").value = "1";
-		document.getElementById("none").style.display = "inline";
-		document.getElementById("none").style.float = "none";
-		document.getElementById("none").value = "next";
-		document.getElementById("none").style.margin = "0px 150px";
-		userRevealed = false;
-	}*/
 	function pauseButton() {
+		for (var i = 1; i < 5; i++)
+			document.getElementById("button"+i).disabled = true;
 		clearTimeout(t);
 		if (userRevealed) {
 			document.getElementById("category").innerHTML = "reveal";
