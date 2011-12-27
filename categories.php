@@ -115,7 +115,7 @@ window.onload = function() { timedCount(); }
 <body>
 <!-- <div id="wrapper"> -->
 <center><input id="timertext" type="text" value="45" /></center>
-<div style="width: 1000px; height: 60px; margin: 10px auto;">
+<div style="height: 60px; margin: 10px auto;">
 <center>
 <?php
 		for ($i=1; $i < 5; $i++) { 

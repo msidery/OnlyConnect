@@ -13,7 +13,7 @@ sqlite3 only_connect.db "CREATE TABLE categories (
 );"
 
 sqlite3 only_connect.db "INSERT INTO categories VALUES (1, 'colours', 'red', 'blue', 'green', 'yellow');"
-sqlite3 only_connect.db "INSERT INTO categories VALUES (2, 'numbers', '1', '2', '3', '4');"
+sqlite3 only_connect.db "INSERT INTO categories VALUES (2, 'numbers', '112345678654', 'vhgscdfjbsdfhbsdfsdf2', 'fwefhgwejfgwejhfgw3', 'sfhsg fsehjfbshf4');"
 sqlite3 only_connect.db "INSERT INTO categories VALUES (3, 'numbers3', '13', '23', '33', '43');"
 sqlite3 only_connect.db "INSERT INTO categories VALUES (4, 'numbers4', '14', '24', '34', '44');"
 sqlite3 only_connect.db "INSERT INTO categories VALUES (5, 'numbers5', '15', '25', '35', '45');"
@@ -30,7 +30,7 @@ sqlite3 only_connect.db "CREATE TABLE sequences (
 
 sqlite3 only_connect.db "INSERT INTO sequences VALUES (1, 'red', 'blue', 'green', 'yellow');"
 sqlite3 only_connect.db "INSERT INTO sequences VALUES (2, '1', '2', '3', '4');"
-sqlite3 only_connect.db "INSERT INTO sequences VALUES (3, '13', '23', '33', '43');"
+sqlite3 only_connect.db "INSERT INTO sequences VALUES (3, '1323456t7', '5623', '4533', '43');"
 sqlite3 only_connect.db "INSERT INTO sequences VALUES (4, '14', '24', '34', '44');"
 sqlite3 only_connect.db "INSERT INTO sequences VALUES (5, '15', '25', '35', '45');"
 sqlite3 only_connect.db "INSERT INTO sequences VALUES (6, '16', '26', '36', '46');"
@@ -47,11 +47,11 @@ sqlite3 only_connect.db "CREATE TABLE wall(
 
 sqlite3 only_connect.db "INSERT INTO wall VALUES(
 	1,
-	'numbers','parents','brothers','pets',
-	'one','two','three','four',
+	'numberserhdfkg','parents','brothers','pets',
+	'one','two','threedfgjdfgkjdf','four',
 	'Colin','Helen','Gerald','Lin',
-	'Trev','Rich','Stu','Nit',
-	'Nixon','Oscar','Gilbert','Matilda'
+	'Trev','Rich','Stu','Nitdfgdfg',
+	'Nixon','Oscardfghdfg','Gilbert','Matilda'
 );"
 sqlite3 only_connect.db "INSERT INTO wall VALUES(
 	2,

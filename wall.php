@@ -186,7 +186,7 @@ if ($row = $result->fetchArray())
                 echo '<div>';
                 for ($j = 0; $j <= 3; $j +=1) {
                         $k = 4*$i + $j;
-	                echo '<input id="btn'.$k.'" onclick="toggle('.$k.')" type="button" value="'.$row[$pointless[$setOrder[$k]]].'" style="background: white;width: 200px; height: 100px; font-size: 300%;">';
+	                echo '<input id="btn'.$k.'" onclick="toggle('.$k.')" type="button" value="'.$row[$pointless[$setOrder[$k]]].'" style="background: white;width: 195px; height: 75px; font-size: 150%;">';
                          echo '</input>';
                 }
 		echo '</div>';
