@@ -12,7 +12,7 @@ sqlite3 only_connect.db "CREATE TABLE categories (
 	word4 VARCHAR(256) NOT NULL
 );"
 
-sqlite3 only_connect.db "INSERT INTO categories VALUES (2, 'arbitrary choices', 'Primary colours of light', 'units of measurement', '0.5 \u2248 1', 'heads or tails');"
+sqlite3 only_connect.db "INSERT INTO categories VALUES (2, 'arbitrary choices', 'Primary colours of light', 'units of measurement', '0.5 ~ 1', 'heads or tails');"
 sqlite3 only_connect.db "INSERT INTO categories VALUES (4, 'Tracys (Thunderbirds)', 'John', 'Gordon', 'Scott', 'Virgil');"
 sqlite3 only_connect.db "INSERT INTO categories VALUES (5, 'both square and cube', '4096', '729', '1', '64');"
 sqlite3 only_connect.db "INSERT INTO categories VALUES (3, 'Broom cupboard presenters', 'Simon Parkin', 'Andy Crane', 'Andi Peters', 'Philip Schofield');"
@@ -46,7 +46,7 @@ sqlite3 only_connect.db "CREATE TABLE wall(
 );"
 
 sqlite3 only_connect.db "INSERT INTO wall VALUES(
-	1,
+	2,
         'captains of starship enterprise','types of fish','mythical creatures','star constellations',
 	'Pike','Kirk','Picard','Archer',
         'Bass','Trout','Chimaera','Cod',
@@ -54,7 +54,7 @@ sqlite3 only_connect.db "INSERT INTO wall VALUES(
 	'Caseopea','Pegasus','Scorpius','Centaurus'
 );"
 sqlite3 only_connect.db "INSERT INTO wall VALUES(
-	2,
+	1,
         'elements','weaknesses','colours','van gogh paintings',
 	'fire','quintessence','hydrogen','neon',
 	'gold','black','sea green','amethyst',
