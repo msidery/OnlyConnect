@@ -1,6 +1,4 @@
-<center><h1>SCORES</h1>
-<h2>Team 1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Team 2</h2>
-
+<center>
 <?php
 
 require './constants.php';
@@ -26,13 +24,6 @@ else if (isset($_POST['none'])) {
 }
 else if (isset($_POST['team2'])) {
 	$con->query('UPDATE scores SET team2=team2+'.$_POST['amount']);
-}
-
-$result = $con->query("SELECT * FROM scores");
-
-if ($row = $result->fetchArray())
-{
-	echo '<h2>'.$row['team1'].'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'.$row['team2'].'</h2>';
 }
 
 // close connection
@@ -104,6 +95,6 @@ $con->close();
 ?>
 
 <form class="team_button_div" action="<?php echo $next; ?>.php" method="post">
-	<input class="team_button" type="submit" name="next" value="Next" style="font-size: 300%;"/>
+	<input class="team_button" type="submit" name="next" value="Next"  style="font-size: 300%;"/>
 </form>
 </center>

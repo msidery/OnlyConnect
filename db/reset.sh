@@ -38,6 +38,7 @@ sqlite3 only_connect.db "INSERT INTO sequences VALUES (6, '16', '26', '36', '46'
 # WALL GAME ###################################################################
 sqlite3 only_connect.db "CREATE TABLE wall(
 	id INTEGER,
+	answer1 VARCHAR(200),answer2 VARCHAR(200),answer3 VARCHAR(200),answer4 VARCHAR(200),
 	oneOne VARCHAR(20),oneTwo VARCHAR(20),oneThree VARCHAR(20),oneFour VARCHAR(20),
 	twoOne VARCHAR(20),twoTwo VARCHAR(20),twoThree VARCHAR(20),twoFour VARCHAR(20),
 	threeOne VARCHAR(20),threeTwo VARCHAR(20),threeThree VARCHAR(20),threeFour VARCHAR(20),
@@ -46,6 +47,7 @@ sqlite3 only_connect.db "CREATE TABLE wall(
 
 sqlite3 only_connect.db "INSERT INTO wall VALUES(
 	1,
+	'numbers','parents','brothers','pets',
 	'one','two','three','four',
 	'Colin','Helen','Gerald','Lin',
 	'Trev','Rich','Stu','Nit',
@@ -53,6 +55,7 @@ sqlite3 only_connect.db "INSERT INTO wall VALUES(
 );"
 sqlite3 only_connect.db "INSERT INTO wall VALUES(
 	2,
+	'numbers','animals','planets','letters',
 	'1','2','3','4',
 	'cat','dog','mouse','sheep',
 	'mars','saturn','jupiter','earth',

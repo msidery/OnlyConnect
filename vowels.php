@@ -112,7 +112,7 @@ endif;
 $con->close();
 
 ?>
-<form class="team_button_div" action="incScore.php" method="post">
+<form class="team_button_div" action="next.php" method="post">
 	<input type="text" name="amount" value="1" style="display: none;" />
 	<input class="team_button" id="team1" type="submit" name="team1" value="Team 1" />
 	<input class="team_button" id="none" type="submit" name="none" value="None" />
